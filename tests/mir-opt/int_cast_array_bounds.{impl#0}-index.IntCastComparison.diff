@@ -1,0 +1,29 @@
+- // MIR for `<impl at $DIR/int_cast_array_bounds.rs:9:1: 9:11>::index` before IntCastComparison
++ // MIR for `<impl at $DIR/int_cast_array_bounds.rs:9:1: 9:11>::index` after IntCastComparison
+  
+  fn <impl at $DIR/int_cast_array_bounds.rs:9:1: 9:11>::index(_1: &Array, _2: u8) -> i32 {
+      debug self => _1;
+      debug i => _2;
+      let mut _0: i32;
+      let _3: usize;
+      let mut _4: u8;
+      let mut _5: bool;
+  
+      bb0: {
+          StorageLive(_3);
+          StorageLive(_4);
+          _4 = copy _2;
+          _3 = move _4 as usize (IntToInt);
+          StorageDead(_4);
+-         _5 = Lt(copy _3, const 256_usize);
++         _5 = no_retag const true;
+          assert(move _5, "index out of bounds: the length is {} but the index is {}", const 256_usize, copy _3) -> [success: bb1, unwind unreachable];
+      }
+  
+      bb1: {
+          _0 = copy ((*_1).0: [i32; 256])[_3];
+          StorageDead(_3);
+          return;
+      }
+  }
+  
