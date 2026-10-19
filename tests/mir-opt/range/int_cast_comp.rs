@@ -1,23 +1,24 @@
-//@ test-mir-pass: IntCastComparison
+//@ test-mir-pass: SsaRangePropagation
 //@ compile-flags: -Zmir-enable-passes=+GVN
 //@ skip-filecheck
 
-// EMIT_MIR int_cast_comp.u8_to_i32_negative.IntCastComparison.diff
-// EMIT_MIR int_cast_comp.i8_to_i32_above.IntCastComparison.diff
-// EMIT_MIR int_cast_comp.i8_to_i32_below.IntCastComparison.diff
-// EMIT_MIR int_cast_comp.i8_to_i32_edges.IntCastComparison.diff
-// EMIT_MIR int_cast_comp.i8_to_u32_gap.IntCastComparison.diff
-// EMIT_MIR int_cast_comp.u16_to_u8.IntCastComparison.diff
-// EMIT_MIR int_cast_comp.u16_to_i8.IntCastComparison.diff
-// EMIT_MIR int_cast_comp.i16_to_u8.IntCastComparison.diff
-// EMIT_MIR int_cast_comp.i16_to_i8.IntCastComparison.diff
-// EMIT_MIR int_cast_comp.u8_to_i8.IntCastComparison.diff
-// EMIT_MIR int_cast_comp.i8_to_u8.IntCastComparison.diff
-// EMIT_MIR int_cast_comp.bool_to_u32.IntCastComparison.diff
-// EMIT_MIR int_cast_comp.char_to_u64.IntCastComparison.diff
-// EMIT_MIR int_cast_comp.u64_to_i128.IntCastComparison.diff
-// EMIT_MIR int_cast_comp.i64_to_u128_gap.IntCastComparison.diff
-// EMIT_MIR int_cast_comp.constant_left.IntCastComparison.diff
+// EMIT_MIR int_cast_comp.u8_to_i32_negative.SsaRangePropagation.diff
+// EMIT_MIR int_cast_comp.i8_to_i32_above.SsaRangePropagation.diff
+// EMIT_MIR int_cast_comp.i8_to_i32_below.SsaRangePropagation.diff
+// EMIT_MIR int_cast_comp.i8_to_i32_edges.SsaRangePropagation.diff
+// EMIT_MIR int_cast_comp.i8_to_u32_gap.SsaRangePropagation.diff
+// EMIT_MIR int_cast_comp.u16_to_u8.SsaRangePropagation.diff
+// EMIT_MIR int_cast_comp.u16_to_i8.SsaRangePropagation.diff
+// EMIT_MIR int_cast_comp.i16_to_u8.SsaRangePropagation.diff
+// EMIT_MIR int_cast_comp.i16_to_i8.SsaRangePropagation.diff
+// EMIT_MIR int_cast_comp.u8_to_i8.SsaRangePropagation.diff
+// EMIT_MIR int_cast_comp.i8_to_u8.SsaRangePropagation.diff
+// EMIT_MIR int_cast_comp.bool_to_u32.SsaRangePropagation.diff
+// EMIT_MIR int_cast_comp.char_to_u64.SsaRangePropagation.diff
+// EMIT_MIR int_cast_comp.u64_to_i128.SsaRangePropagation.diff
+// EMIT_MIR int_cast_comp.i64_to_u128_gap.SsaRangePropagation.diff
+// EMIT_MIR int_cast_comp.constant_left.SsaRangePropagation.diff
+// EMIT_MIR int_cast_comp.ssa.SsaRangePropagation.diff
 
 struct TestResult {
     gt: bool,
@@ -217,5 +218,13 @@ fn constant_left(l: u8) -> TestResult {
         le: 423 <= l,
         eq: 424 == l,
         ne: 425 != l,
+    }
+}
+
+fn ssa(l: u8, cond: bool) -> bool {
+    if cond {
+        (l as usize) < 256usize
+    } else {
+        false
     }
 }

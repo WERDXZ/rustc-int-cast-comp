@@ -1,11 +1,11 @@
-- // MIR for `i16_to_i8` before IntCastComparison
-+ // MIR for `i16_to_i8` after IntCastComparison
+- // MIR for `u8_to_i8` before SsaRangePropagation
++ // MIR for `u8_to_i8` after SsaRangePropagation
   
-  fn i16_to_i8(_1: i16) -> TestResult {
+  fn u8_to_i8(_1: u8) -> TestResult {
       debug l => _1;
       let mut _0: TestResult;
       let _2: i8;
-      let mut _3: i16;
+      let mut _3: u8;
       let mut _4: bool;
       let mut _5: i8;
       let mut _6: bool;

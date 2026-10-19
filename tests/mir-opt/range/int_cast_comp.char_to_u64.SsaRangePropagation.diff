@@ -1,23 +1,23 @@
-- // MIR for `u8_to_i8` before IntCastComparison
-+ // MIR for `u8_to_i8` after IntCastComparison
+- // MIR for `char_to_u64` before SsaRangePropagation
++ // MIR for `char_to_u64` after SsaRangePropagation
   
-  fn u8_to_i8(_1: u8) -> TestResult {
+  fn char_to_u64(_1: char) -> TestResult {
       debug l => _1;
       let mut _0: TestResult;
-      let _2: i8;
-      let mut _3: u8;
+      let _2: u64;
+      let mut _3: char;
       let mut _4: bool;
-      let mut _5: i8;
+      let mut _5: u64;
       let mut _6: bool;
-      let mut _7: i8;
+      let mut _7: u64;
       let mut _8: bool;
-      let mut _9: i8;
+      let mut _9: u64;
       let mut _10: bool;
-      let mut _11: i8;
+      let mut _11: u64;
       let mut _12: bool;
-      let mut _13: i8;
+      let mut _13: u64;
       let mut _14: bool;
-      let mut _15: i8;
+      let mut _15: u64;
       scope 1 {
           debug l => _2;
       }
@@ -26,37 +26,37 @@
           StorageLive(_2);
           StorageLive(_3);
           _3 = copy _1;
-          _2 = copy _1 as i8 (IntToInt);
+          _2 = copy _1 as u64 (IntToInt);
           StorageDead(_3);
           StorageLive(_4);
           StorageLive(_5);
           _5 = copy _2;
-          _4 = Gt(copy _2, const -1_i8);
+          _4 = Gt(copy _2, const 1114111_u64);
           StorageDead(_5);
           StorageLive(_6);
           StorageLive(_7);
           _7 = copy _2;
-          _6 = Ge(copy _2, const -2_i8);
+          _6 = Ge(copy _2, const 1114112_u64);
           StorageDead(_7);
           StorageLive(_8);
           StorageLive(_9);
           _9 = copy _2;
-          _8 = Lt(copy _2, const -3_i8);
+          _8 = Lt(copy _2, const 1114112_u64);
           StorageDead(_9);
           StorageLive(_10);
           StorageLive(_11);
           _11 = copy _2;
-          _10 = Le(copy _2, const -4_i8);
+          _10 = Le(copy _2, const 1114111_u64);
           StorageDead(_11);
           StorageLive(_12);
           StorageLive(_13);
           _13 = copy _2;
-          _12 = Eq(copy _2, const -5_i8);
+          _12 = Eq(copy _2, const 55296_u64);
           StorageDead(_13);
           StorageLive(_14);
           StorageLive(_15);
           _15 = copy _2;
-          _14 = Ne(copy _2, const -6_i8);
+          _14 = Ne(copy _2, const 55296_u64);
           StorageDead(_15);
           _0 = TestResult { gt: move _4, ge: move _6, lt: move _8, le: move _10, eq: move _12, ne: move _14 };
           StorageDead(_14);

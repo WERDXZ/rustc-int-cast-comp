@@ -157,7 +157,6 @@ declare_passes! {
     pub mod inline : Inline, ForceInline;
     mod impossible_clauses : ImpossibleClauses;
     mod instsimplify : InstSimplify { BeforeInline, AfterSimplifyCfg };
-    mod int_cast_comp: IntCastComparison;
     mod jump_threading : JumpThreading;
     mod known_panics_lint : KnownPanicsLint;
     mod lint_and_remove_uninhabited : LintAndRemoveUninhabited;
@@ -755,7 +754,6 @@ pub(crate) fn run_optimization_passes<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'
             // Keep it close to GVN which merges identical values into the same local.
             &ssa_range_prop::SsaRangePropagation,
             &match_branches::MatchBranchSimplification,
-            &int_cast_comp::IntCastComparison,
             &dataflow_const_prop::DataflowConstProp,
             &single_use_consts::SingleUseConsts,
             &o1(simplify_branches::SimplifyConstCondition::AfterConstProp),
